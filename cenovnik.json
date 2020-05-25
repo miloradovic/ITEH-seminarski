@@ -1,0 +1,35 @@
+{
+    "cenovnik": [
+        {
+            "id": 1,
+            "naziv": "Tablice za teške četvorocikle, putnička vozila, autobuse, trolejbuse i teretna vozila",
+            "cena": 2193,
+            "privremena": false
+        },
+        {
+            "id": 2,
+            "naziv": "Tablice za vozila kojima se obavlja auto-taksi prevoz - sa oznakom 'TX'",
+            "cena": 2193,
+            "privremena": false
+        },
+        {
+            "id": 3,
+            "naziv": "Tablice za teške četvorocikle odnosno putnička vozila po izboru",
+            "cena": 87532,
+            "privremena": false
+        },
+        {
+            "id": 4,
+            "naziv": "Tablica za traktore i radne mašine",
+            "cena": 1173,
+            "privremena": false
+        },
+        {
+            "id": 5,
+            "naziv": "Tablice za privremeno registrovane teške četvorocikle, putnička vozila, autobuse, trolejbuse i teretna vozila sa oznakom 'PR'",
+            "cena": 2560,
+            "privremena": true
+        }
+    ]
+}
+    
