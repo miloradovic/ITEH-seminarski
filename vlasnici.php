@@ -1,4 +1,20 @@
-<?php include 'init.php'; ?>
+<?php 
+
+include 'init.php';
+
+if (!isset($_SESSION['ulogovaniKorisnik']) || empty($_SESSION['ulogovaniKorisnik'])) {
+    header('location: login.php');
+    exit;
+}
+
+$vlasnik = $_SESSION['ulogovaniKorisnik'];
+
+if ($vlasnik->uloga == "admin") {
+    header('location: tablice.php');
+    exit;
+}
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -6,68 +22,88 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
-    <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/main.css">
 
-    <title>Lista vlasnika</title>
+    <title>Lista mojih vozila</title>
 </head>
 
 <body>
 
     <?php include 'komponente/header.php'; ?>
     <?php include 'komponente/navbar.php'; ?>
+    
     <br>
-    <section class="section-2" data-aos="fade-left" data-aos-delay="300">
-      <div class="container">
-         <h3 class="text-center">Lista vlasnika</h3>
+    <div class="container">
+        <!-- Nav tabs -->
 
-         <label for="naziv">Unesite termin pretrage</label>
-          <input type="text" id="termin" class="form-control">
-          
-          <div id="podaci">
+        <ul class="nav nav-tabs justify-content-center" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="#mojavozila" role="tab" data-toggle="tab">Moja Vozila</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#nalog" role="tab" data-toggle="tab">Nalog</a>
+            </li>
+        </ul>
 
-          </div>
-      </div>
-    </section>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active in" id="mojavozila">
+                <section class="section-2">
+                <div class="container">
+                    <h4 class="text-center">Lista mojih vozila</h4>
+
+                    <div id="podaci">
+                        
+                    </div>
+                </div>
+                </section>
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="nalog">
+            <section class="section-2">
+            <div class="container">
+                <?php if (isset($_GET['msg'])) { ?>
+                <div class="alert alert-primary" role="alert">
+                    <?php echo $_GET['msg']; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php } ?>
+
+                <br>
+                <h3 class="text-center">Nalog</h3>
+                <p>Promeni email adresu: </p>
+                <form method="POST" action="db/kontroler.php">
+                    <input type="text" placeholder="Unesi novu email adresu" class="form-control" name="noviEmail">
+                    <hr>
+                    <input type="submit" class="form-control btn-primary" name="izmenaEmailAdrese" value="Izmena">
+                </form>
+            </div>
+            </section>
+            </div>
+        </div>
+    </div>
+    
 
     <?php include 'komponente/footer.php'; ?>
 
-    <script src="js/jquery.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
-    <script src="js/animate.js"></script>
-    <script src="js/custom.js"></script>
-    <script>
-        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-            event.preventDefault();
-            $(this).ekkoLightbox();
-        });
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
-    </script>
     <script>
-        function pretraziVlasnike(){
-            $.ajax({
-                url: 'db/pretraziVlasnike.php',
-                data: {
-                    termin: $("#termin").val()
-                },
-                success: function(data){
-                    $("#podaci").html(data);
-                }
-            });
-        }
-
-        $('#termin').keydown(function() {
-            pretraziVlasnike();
-        });
-        
-        $( "#termin" ).ready(function() {
-            pretraziVlasnike();
+        $.ajax({            
+            url: 'db/pretraziMojaVozila.php',
+            data: {
+                id_vlasnika: <?php echo json_encode($vlasnik->id); ?>
+            },
+            success: function(data){
+                $("#podaci").html(data);
+            }
         });
     </script>
 </body>
