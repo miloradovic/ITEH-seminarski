@@ -18,8 +18,8 @@ class Tablica
                 LEFT JOIN korisnik v ON t.id_vlasnik=v.id 
                 LEFT JOIN korisnik k ON t.id_kontrolor=k.id
                 LEFT JOIN vozilo vo ON t.id_vozilo=vo.id";
-        if ($this->vlasnik->id != null) {
-            $sql .= " WHERE v.id=" . $this->vlasnik->id;
+        if (isset($this->vlasnik->id)) {
+            $sql .= " WHERE t.id_vlasnik=" . $this->vlasnik->id;
         }
         $sql .= " ORDER BY t.tablica ASC";
         $rezultat = $mysqli->query($sql);

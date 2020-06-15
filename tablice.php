@@ -2,8 +2,8 @@
 
 include 'init.php';
 
-$vlasnik = new Vlasnik();
-$nizVlasnika = $vlasnik->vratiSve($mysqli);
+$vlasnik = new Korisnik();
+$nizVlasnika = $vlasnik->vratiSveVlasnike($mysqli);
 
 $vozilo = new Vozilo();
 $nizVozila = $vozilo->vratiSve($mysqli);
@@ -47,7 +47,7 @@ $nizTablica = $tablica->vratiSve($mysqli);
                     <?php
                         foreach ($nizVlasnika as $vlasnici) {
                             ?>
-                        <option value="<?= $vlasnici->id ?>"><?= $vlasnici->ime . ' ' . $vlasnici->prezime ?></option>
+                        <option value="<?= $vlasnici->id ?>"><?= $vlasnici->ime_prezime ?></option>
 
                         <?php
                         }
@@ -112,6 +112,7 @@ $nizTablica = $tablica->vratiSve($mysqli);
                         <th>Model</th>
                         <th>Tablica</th>
                         <th>Datum izdavanja</th>
+                        <th>Cena</th>
                         <th>Obrisi</th>
                     </tr>
                 </thead>
@@ -121,11 +122,12 @@ $nizTablica = $tablica->vratiSve($mysqli);
                     foreach ($nizTablica as $tbl) {
                         ?>
                         <tr>
-                            <td><?= $tbl->vlasnik->ime . ' ' . $tbl->vlasnik->prezime ?></td>
+                            <td><?= $tbl->vlasnik->ime_prezime ?></td>
                             <td><?= $tbl->vozilo->marka  ?></td>
                             <td><?= $tbl->vozilo->model  ?></td>
                             <td><?= $tbl->tablica ?></td>
                             <td><?= $tbl->datum ?></td>
+                            <td><?= $tbl->cena ?></td>
                             <td><a href="db/obrisiTablicu.php?id=<?= $tbl->id ?>" class="btn btn-danger">Obrisi</a></td>
                         </tr>
                         <?php

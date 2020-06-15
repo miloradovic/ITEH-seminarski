@@ -20,7 +20,7 @@
     
     <div class="container">
     <br>
-    <h3 >Ukratko o nama</h3>
+    <h3 class="text-center">Ukratko o nama</h3>
         <div class="row">
             <div class="col-md-6 themed-grid-col">
             <section class="section-2" data-aos="fade-left" data-aos-delay="300">

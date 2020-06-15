@@ -11,7 +11,7 @@ class Korisnik
     public function login($mysqli)
     {
         // Treba join ULOGA
-        $sql = "SELECT * FROM korisnik k JOIN uloga u ON k.id_uloga=u.id WHERE email='$this->email' and sifra='$this->sifra'";
+        $sql = "SELECT k.*, u.naziv FROM korisnik k JOIN uloga u ON k.id_uloga=u.id WHERE email='$this->email' and sifra='$this->sifra'";
         $rezultat = $mysqli->query($sql);
 
         while ($red = $rezultat->fetch_object()) {

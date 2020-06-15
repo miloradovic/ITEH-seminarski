@@ -295,3 +295,10 @@ Stack trace:
 [31-Mar-2020 22:36:04 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\laragon\www\treci_zadatak\tablice.php on line 84
 [31-Mar-2020 22:36:04 UTC] PHP Notice:  Undefined variable: nizTablica in C:\laragon\www\treci_zadatak\tablice.php on line 117
 [31-Mar-2020 22:36:04 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\laragon\www\treci_zadatak\tablice.php on line 117
+[15-Jun-2020 15:19:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetch_object() on bool in C:\laragon\www\seminarski\domen\Korisnik.php:46
+Stack trace:
+#0 C:\laragon\www\seminarski\tablice.php(6): Korisnik->vratiSveVlasnike(Object(mysqli))
+#1 {main}
+  thrown in C:\laragon\www\seminarski\domen\Korisnik.php on line 46
+[15-Jun-2020 15:29:18 UTC] PHP Parse error:  syntax error, unexpected '}', expecting end of file in C:\laragon\www\seminarski\komponente\navbar.php on line 34
+[15-Jun-2020 15:45:42 UTC] PHP Parse error:  syntax error, unexpected '}', expecting end of file in C:\laragon\www\seminarski\komponente\navbar.php on line 40

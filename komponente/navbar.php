@@ -13,11 +13,35 @@
                 <li class="nav-item">
                     <a class="nav-link" href="vozila.php">Lista vozila</a>
                 </li>
+                <?php
+                  if ($_SESSION['ulogovaniKorisnik'] != null) {
+                      if ($_SESSION['ulogovaniKorisnik']->uloga == 'kontrolor') { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="tablice.php">Tablice</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="izvestaj.php">Izvestaj</a>
+                        </li>
+                      <?php 
+                        } 
+                        if ($_SESSION['ulogovaniKorisnik']->uloga == 'vlasnik') { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="vlasnici.php">Moja Vozila</a>
+                            </li>
+                        <?php } ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                    <?php } else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registracija.php">Registracija</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                    <?php } ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="vlasnici.php">Lista vlasnika</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="tablice.php">Registracija</a>
+                    <a class="nav-link" href="onama.php">O nama</a>
                 </li>
             </ul>
         </div>
