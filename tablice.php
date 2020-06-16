@@ -24,6 +24,7 @@ $nizTablica = $tablica->vratiSve($mysqli);
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
         <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 
         <title>Reg Tablice</title>
     </head>
@@ -104,6 +105,7 @@ $nizTablica = $tablica->vratiSve($mysqli);
         <section class="section-2" data-aos="fade-left" data-aos-delay="300">
         <div class="container">
             <h3 class="text-center">Brisanje reg tablice</h3>
+            <br>
             <table id="tabelaTablica" class="table table-hover">
                 <thead>
                     <tr>
@@ -144,7 +146,23 @@ $nizTablica = $tablica->vratiSve($mysqli);
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
         <script src="js/animate.js"></script>
         <script src="js/custom.js"></script>
+        <script type="text/javascript" src="DataTables/datatables.min.js"></script>
 
+        <script>
+            $(document).ready( function () {
+                $('#tabelaTablica').DataTable( {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: [ 0, 1, 2, 3, 4, 5 ]
+                            }
+                        }
+                    ]
+                });
+            });
+        </script>
         <?php include 'komponente/footer.php'; ?>
 
         <script>
