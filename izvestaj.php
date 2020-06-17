@@ -18,12 +18,34 @@
     <?php include 'komponente/header.php'; ?>
     <?php include 'komponente/navbar.php'; ?>
     
+    <section class="section-2" data-aos="fade-left" data-aos-delay="300">
+      <div class="container">
+         <h3 class="text-center">Graficki prikaz podataka</h3>
+         <div id="grafik"></div>
+
+         <select onchange="crtajGrafik(this.value)" class="form-control">
+           <option value="1">Broj komentara po kontroloru</option>
+           <option value="2">Zarada po mesecu</option>
+         </select>
+      </div>
+    </section>
     <br>
-    <h2 class="text-center">TODO</h2>
+
+    <!-- <section class="section-2" data-aos="fade-left" data-aos-delay="300">
+      <div class="container">
+         <h3 class="text-center">Graficki prikaz podataka</h3>
+         <div id="grafikB"></div>
+
+         <select onchange="crtajGrafik(this.value)" class="form-control">
+           <option value="A">Broj komentara po korisniku</option>
+           <option value="B">Broj komentara po crtanom filmu</option>
+         </select>
+      </div>
+    </section> -->
 
     <?php include 'komponente/footer.php'; ?>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="js/jquery.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
@@ -34,7 +56,83 @@
             event.preventDefault();
             $(this).ekkoLightbox();
         });
-
     </script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(crtajGrafik1);
+
+        function crtajGrafik(opcija){
+          if(opcija == 1){
+            crtajGrafik1();
+          }
+          if(opcija == 2){
+            crtajGrafik2();
+          }
+        }
+
+        function crtajGrafik1() {
+          var niz = [];
+          var kolone = [];
+          kolone.push("Kontrolor");
+          kolone.push("Broj registracija");
+          niz.push(kolone);
+          $.ajax({
+            url: 'db/grafik1.php',
+            success: function(data){
+              $.each(JSON.parse(data),function(i,podatak){
+                var imePrezime = podatak.ime_prezime;
+                var broj = parseInt(podatak.brojRegistracija);
+                var red = [];
+                red.push(imePrezime);
+                red.push(broj);
+                niz.push(red);
+              })
+              var podaci = google.visualization.arrayToDataTable(niz);
+
+              var options = {
+                title: 'Broj registracija po kontroloru',
+                height: 600
+              };
+
+              var chart = new google.visualization.PieChart(document.getElementById('grafik'));
+
+              chart.draw(podaci, options);
+            }
+          })
+        }
+
+        function crtajGrafik2() {
+          var niz = [];
+          var kolone = [];
+          kolone.push("Ukupno");
+          kolone.push("Datum");
+          niz.push(kolone);
+          $.ajax({
+            url: 'db/grafik2.php',
+            success: function(data){
+              $.each(JSON.parse(data),function(i,podatak){
+                var ukupno = parseInt(podatak.ukupno);
+                var datum = new Date(parseInt(podatak.godina), parseInt(podatak.mesec), 1);
+                var red = [];
+                red.push(datum);
+                red.push(ukupno);
+                niz.push(red);
+              })
+              var podaci = google.visualization.arrayToDataTable(niz);
+
+              var options = {
+                title: 'Zarada po mesecu',
+                height: 600
+              };
+
+              var chart = new google.visualization.ColumnChart(document.getElementById('grafik'));
+
+              chart.draw(podaci, options);
+            }
+          })
+        } 
+      </script>
 </body>
 </html>
