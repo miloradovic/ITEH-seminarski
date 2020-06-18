@@ -1,4 +1,20 @@
-<?php include 'init.php'; ?>
+<?php 
+
+include 'init.php';
+
+if (!isset($_SESSION['ulogovaniKorisnik']) || empty($_SESSION['ulogovaniKorisnik'])) {
+    header('location: login.php');
+    exit;
+}
+
+$kontrolor = $_SESSION['ulogovaniKorisnik'];
+
+if ($kontrolor->uloga == "vlasnik") {
+    header('location: vlasnici.php');
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,18 +46,6 @@
       </div>
     </section>
     <br>
-
-    <!-- <section class="section-2" data-aos="fade-left" data-aos-delay="300">
-      <div class="container">
-         <h3 class="text-center">Graficki prikaz podataka</h3>
-         <div id="grafikB"></div>
-
-         <select onchange="crtajGrafik(this.value)" class="form-control">
-           <option value="A">Broj komentara po korisniku</option>
-           <option value="B">Broj komentara po crtanom filmu</option>
-         </select>
-      </div>
-    </section> -->
 
     <?php include 'komponente/footer.php'; ?>
 
