@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include 'init.php';
 
@@ -9,7 +9,7 @@ if (!isset($_SESSION['ulogovaniKorisnik']) || empty($_SESSION['ulogovaniKorisnik
 
 $vlasnik = $_SESSION['ulogovaniKorisnik'];
 
-if ($vlasnik->uloga == "admin") {
+if ($vlasnik->uloga == "kontrolor") {
     header('location: tablice.php');
     exit;
 }
@@ -65,23 +65,22 @@ if ($vlasnik->uloga == "admin") {
             <div role="tabpanel" class="tab-pane fade" id="nalog">
             <section class="section-2">
             <div class="container">
-                <?php if (isset($_GET['msg'])) { ?>
-                <div class="alert alert-primary" role="alert">
-                    <?php echo $_GET['msg']; ?>
+                <!-- <div class="alert alert-primary" role="alert" style="display:none;">
+                    <p id="porukaEmail"></p> 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
-                <?php } ?>
+                </div> -->
 
                 <br>
                 <h3 class="text-center">Nalog</h3>
-                <p>Promeni email adresu: </p>
-                <form method="POST" action="db/kontroler.php">
-                    <input type="text" placeholder="Unesi novu email adresu" class="form-control" name="noviEmail">
-                    <hr>
-                    <input type="submit" class="form-control btn-primary" name="izmenaEmailAdrese" value="Izmena">
-                </form>
+                <p>Trenutna email adresu: <b><?php echo $vlasnik->email; ?></b></p>
+                <div id="novaAdresa"></div>
+                <br />
+                <label for="noviMail">Unesite novu email adresu: </label>
+          <input type="text" id="noviEmail" class="form-control">
+          <hr>
+          <button onclick="promeniEmailAdresu()" class="form-control btn-primary">Promeni</button>
             </div>
             </section>
             </div>
@@ -105,6 +104,18 @@ if ($vlasnik->uloga == "admin") {
                 $("#podaci").html(data);
             }
         });
+
+        function promeniEmailAdresu() {
+            $.ajax({
+                url: 'db/promeniEmail.php',
+                data: {
+                    noviEmail: $("#noviEmail").val()
+                },
+                success: function(response){
+                    $("#novaAdresa").html(response);
+                }
+            });
+        }
     </script>
 </body>
 </html>

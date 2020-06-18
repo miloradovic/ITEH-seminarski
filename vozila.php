@@ -55,10 +55,11 @@
     </script>
     <script>
       function pretraziVozila(){
-
         $.ajax({
           url: 'db/pretraziVozila.php',
-          data: {marka: $("#marka").val()},
+          data: {
+            marka: $("#marka").val()
+          },
           success: function(data){
             $("#podaci").html(data);
           }

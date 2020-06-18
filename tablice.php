@@ -2,6 +2,18 @@
 
 include 'init.php';
 
+if (!isset($_SESSION['ulogovaniKorisnik']) || empty($_SESSION['ulogovaniKorisnik'])) {
+    header('location: login.php');
+    exit;
+}
+
+$kontrolor = $_SESSION['ulogovaniKorisnik'];
+
+if ($kontrolor->uloga == "vlasnik") {
+    header('location: vlasnici.php');
+    exit;
+}
+
 $vlasnik = new Korisnik();
 $nizVlasnika = $vlasnik->vratiSveVlasnike($mysqli);
 
@@ -172,10 +184,13 @@ $nizTablica = $tablica->vratiSve($mysqli);
 
                     // get the form data
                     // there are many ways to get this data using jQuery (you can use the class or id also)
+                    var idTipTablice = $(':input[name=tipTablica]').val();
                     var formData = {
-                        'idVlasnik' : $(':input[name=vlasnik]').val(),
-                        'idVozilo'  : $(':input[name=vozilo]').val(),
-                        'tablica'   : $(':input[name=tablica]').val()
+                        'idVlasnik'  : $(':input[name=vlasnik]').val(),
+                        'idKontrolor': <?php echo json_encode($kontrolor->id); ?>,
+                        'idVozilo'   : $(':input[name=vozilo]').val(),
+                        'tablica'    : $(':input[name=tablica]').val(),
+                        'cena'       : cenovnik[idTipTablice]
                     };
                     
                     $.ajax({
@@ -228,11 +243,13 @@ $nizTablica = $tablica->vratiSve($mysqli);
 
             const url = 'https://my-json-server.typicode.com/miloradovic/cenovnik/cenovnik';
 
+            var cenovnik = new Array();
             // Populate dropdown with list of reg tablica
             $.getJSON(url, function (data) {
                 $.each(data, function (key, entry) {
                     if (entry.privremena === false) {
                         dropdown.append($('<option></option>').attr('value', entry.id).text(entry.naziv + " - " + entry.cena + " RSD"));
+                        cenovnik[entry.id] = entry.cena;
                     }                    
                 })
             });

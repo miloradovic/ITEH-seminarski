@@ -31,9 +31,9 @@
                         <i class="fa fa-vcard" aria-hidden="true"></i>
                     </div>
                     <div class="col-lg-10 col-sm-12">
-                        <h3><a href="#">Tablice</a></h3>
+                        <h3><a href="tablice.php">Tablice</a></h3>
                         <p>Unos novih reg tablica u bazu, kao i izmena/brisanje prethodno unetih. </p>
-                        <p><a href="#"><img src="images/plus.png" alt="plus"></a></p>
+                        <p><a href="tablice.php"><img src="images/plus.png" alt="plus"></a></p>
                     </div>
                 </div>
             </div>
