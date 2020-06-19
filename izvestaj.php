@@ -35,6 +35,12 @@ if ($kontrolor->uloga == "vlasnik") {
     <?php include 'komponente/navbar.php'; ?>
     
     <section class="section-2" data-aos="fade-left" data-aos-delay="300">
+        <div class="container">
+            <h4 id="msg" class="text-center"><?php if (isset($_GET['msg'])) { echo $_GET['msg']; } ?></h4>                            
+        </div>
+    </section>
+
+    <section class="section-2" data-aos="fade-left" data-aos-delay="300">
       <div class="container">
          <h3 class="text-center">Graficki prikaz podataka</h3>
          <div id="grafik"></div>
@@ -47,6 +53,13 @@ if ($kontrolor->uloga == "vlasnik") {
     </section>
     <br>
 
+    <section class="section-2" data-aos="fade-left" data-aos-delay="300">
+      <div class="container">
+        <h4>Posalji dnevni izvestaj: </h4>
+        <a href="db/dnevni_izvestaj.php" class="btn btn-primary">Posalji</a>
+      </div>
+    </section>
+    <br>
     <?php include 'komponente/footer.php'; ?>
 
     <script src="js/jquery.js" ></script>
