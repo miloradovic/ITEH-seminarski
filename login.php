@@ -60,7 +60,7 @@ if(isset($_POST['login'])){
            <label for="password">Sifra</label>
            <input type="password" name="password" class="form-control" id="password">
            <hr>
-           <input type="submit" name="login" value="Login" class="form-control btn-warning" id="login">
+           <input type="submit" name="login" value="Login" class="form-control btn-primary" id="login">
          </form>
       </div>
     </section>

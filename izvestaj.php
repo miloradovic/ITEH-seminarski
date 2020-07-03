@@ -46,7 +46,7 @@ if ($kontrolor->uloga == "vlasnik") {
          <div id="grafik"></div>
 
          <select onchange="crtajGrafik(this.value)" class="form-control">
-           <option value="1">Broj komentara po kontroloru</option>
+           <option value="1">Ucinak po kontroloru</option>
            <option value="2">Zarada po mesecu</option>
          </select>
       </div>

@@ -64,7 +64,7 @@
            <input type="password" name="password" class="form-control" id="password" required>
            <br>
            <hr>
-           <input type="submit" name="registracija" value="Registracija korisnika" class="form-control btn-warning" id="registracija">
+           <input type="submit" name="registracija" value="Registracija korisnika" class="form-control btn-primary" id="registracija">
          </form>         
       </div>
     </section>
